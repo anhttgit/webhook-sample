@@ -21,6 +21,11 @@ app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 
+app.get('/privacy', (req, res) => {
+  res.send("My privacy");
+});
+
+
 app.get('/webhook', function(req, res) {
   if (req.query['hub.verify_token'] === 'maxacminh') {
     res.send(req.query['hub.challenge']);
