@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 
 req.end()
 
-
+app.use('/public', express.static(__dirname + '/public'));  
+app.use(express.static(__dirname + '/public')); 
 app.get('/webhook', function(req, res) {
   
     var body = '';
