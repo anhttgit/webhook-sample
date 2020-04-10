@@ -27,9 +27,11 @@ app.get('/privacy', (req, res) => {
 
 
 app.get('/webhook', function(req, res) {
-  if (req.query['hub.verify_token'] === 'maxacminh') {
-    res.send(req.query['hub.challenge']);
-  }
+  console.log(req.body);
+  res.send(req.body);
+//   if (req.query['hub.verify_token'] === 'maxacminh') {
+//     res.send(req.query['hub.challenge']);
+//   }
   res.send('Error, wrong validation token');
 });
 
