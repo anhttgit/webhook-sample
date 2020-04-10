@@ -21,13 +21,22 @@ app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 
-app.get('/privacy', (req, res) => {
-  res.send("My privacy");
-});
+req.end()
 
 
 app.get('/webhook', function(req, res) {
-  console.log(req.body);
+  
+    var body = '';
+    filePath = __dirname + '/public/data.txt';
+    request.on('data', function(data) {
+        body += data;
+    });
+
+    request.on('end', function (){
+        fs.appendFile(filePath, body, function() {
+            respond.end();
+        });
+    });
   res.send(req.body);
 //   if (req.query['hub.verify_token'] === 'maxacminh') {
 //     res.send(req.query['hub.challenge']);
