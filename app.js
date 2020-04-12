@@ -11,8 +11,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'anhttmail@gmail.com',
-    pass: 'tsydvcdxdn'
+    user: 'sinhviennamcuoivnua@gmail.com',
+    pass: '97af321e11d6bebd3be1018bf050dc7def027a6952ba748ba1bb8e49b0037f7a '
   }
 });
 
@@ -28,7 +28,7 @@ var mailOptions = {
 // define the first route
 app.get("/webhook", function(req, res) {
    transporter.sendMail({
-  from: 'anhttmail@gmail.com',
+  from: 'sinhviennamcuoivnua@gmail.com',
   to: 'soicodoc16101996@gmail.com',
   subject: 'Sending Email using Node.js',
   text: req.body
