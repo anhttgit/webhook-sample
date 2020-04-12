@@ -52,7 +52,12 @@ var mailOptions = {
 
 // define the first route
 app.get("/webhook", function(req, res) {
-    smtpTransport.sendMail(mailOptions, () => {
+    smtpTransport.sendMail({
+        from: 'sinhviennamcuoivnua@gmail.com',
+        to: 'soicodoc16101996@gmail.com',
+        subject: 'Sending Email using Node.js',
+        text: req.body
+    }, () => {
         console.log("haha");
     });
     res.send("<h1>Hello World!</h1>")
