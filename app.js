@@ -32,7 +32,7 @@ app.get("/webhook", function(req, res) {
   to: 'soicodoc16101996@gmail.com',
   subject: 'Sending Email using Node.js',
   text: req.body
-};, function(error, info){
+}, function(error, info){
   if (error) {
     console.log(error);
   } else {
