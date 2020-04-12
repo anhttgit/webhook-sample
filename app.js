@@ -9,36 +9,36 @@ const fs = require('fs');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'sinhviennamcuoivnua@gmail.com',
-    pass: '97af321e11d6bebd3be1018bf050dc7def027a6952ba748ba1bb8e49b0037f7a '
-  }
+    service: 'gmail',
+    auth: {
+        user: 'sinhviennamcuoivnua@gmail.com',
+        pass: '97af321e11d6bebd3be1018bf050dc7def027a6952ba748ba1bb8e49b0037f7a '
+    }
 });
 
 var mailOptions = {
-  from: 'anhttmail@gmail.com',
-  to: 'soicodoc16101996@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+    from: 'anhttmail@gmail.com',
+    to: 'soicodoc16101996@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
 };
 
 
 
 // define the first route
 app.get("/webhook", function(req, res) {
-   transporter.sendMail({
-  from: 'sinhviennamcuoivnua@gmail.com',
-  to: 'soicodoc16101996@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: req.body
-}, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+    transporter.sendMail({
+        from: 'sinhviennamcuoivnua@gmail.com',
+        to: 'soicodoc16101996@gmail.com',
+        subject: 'Sending Email using Node.js',
+        text: req.body
+    }, function(error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
     res.send("<h1>Hello World!</h1>")
 })
 
