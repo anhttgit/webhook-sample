@@ -1,51 +1,29 @@
-// # SimpleServer
-// A simple chat bot server
+const express = require("express")
+const app = express()
+const bodyParser = require('body-parser');
+app.use(bodyParser.text({ type: 'text/plain' }))
+    // use the express-static middleware
+app.use(express.static("public"))
 
-var logger = require('morgan');
-var http = require('http');
-var bodyParser = require('body-parser');
-var express = require('express');
-var request = require('request');
-var router = express();
+// define the first route
+app.get("/webhook", function(req, res) {
+    userAction(req.body);
 
-var app = express();
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-var server = http.createServer(app);
-
-
-app.get('/', (req, res) => {
-  res.send("Home page. Server running okay.");
-});
-
-req.end()
-
-app.use('/public', express.static(__dirname + '/public'));  
-app.use(express.static(__dirname + '/public')); 
-app.get('/webhook', function(req, res) {
-  
-    var body = '';
-    filePath = __dirname + '/public/data.txt';
-    request.on('data', function(data) {
-        body += data;
+    res.send("<h1>Hello World!</h1>")
+})
+const userAction = async(myBody) => {
+    const response = await fetch('http://localhost:3000/url', {
+        method: 'POST',
+        body: myBody, // string or object
+        headers: {
+            'Content-Type': 'application/json'
+        }
     });
+    const myJson = await response.json(); //extract JSON from the http response
+    // do something with myJson
+}
 
-    request.on('end', function (){
-        fs.appendFile(filePath, body, function() {
-            respond.end();
-        });
-    });
-  res.send(req.body);
-//   if (req.query['hub.verify_token'] === 'maxacminh') {
-//     res.send(req.query['hub.challenge']);
-//   }
-  res.send('Error, wrong validation token');
-});
 
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
-app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || "127.0.0.1");
-
-server.listen(app.get('port'));
+// start the server listening for requests
+app.listen(process.env.PORT || 3000,
+    () => console.log("Server is running..."));
