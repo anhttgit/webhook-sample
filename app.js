@@ -6,15 +6,39 @@ app.use(bodyParser.text({ type: 'text/plain' }))
 app.use(express.static("public"))
 const fs = require('fs');
 
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'anhttmail@gmail.com',
+    pass: 'tsydvcdxdn'
+  }
+});
+
+var mailOptions = {
+  from: 'anhttmail@gmail.com',
+  to: 'soicodoc16101996@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+
+
 // define the first route
 app.get("/webhook", function(req, res) {
-    userAction(req.body);
-    fs.writeFile("test.txt", req.body, function(err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("The file was saved!");
-    });
+   transporter.sendMail({
+  from: 'anhttmail@gmail.com',
+  to: 'soicodoc16101996@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: req.body
+};, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
     res.send("<h1>Hello World!</h1>")
 })
 
